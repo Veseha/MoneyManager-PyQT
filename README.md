@@ -1,6 +1,6 @@
-# Information is not for Russians
-This program currently only works in Russian.
-Use the Google translator or learn Russian (in extreme cases, you can wait until I make the English version)
+# Information is not for russians
+This program currently only works in russian.
+Use the Google translator or learn russian (in extreme cases, you can wait until I make the English version)
 
 # Money manager byVeseha
 
