@@ -33,7 +33,21 @@ class Grafic(QWidget):
 
     def initUI(self):
         self.angle = [(500, 500), (-500, 500), (-500, -500), (500, -500)]
-        self.listmoneyMax = sorted(self.listmoney)[-1]
+        self.listmoneyMax = 0
+        self.timesMoney = 0
+
+        for i in self.listmoney:            # Чекает на максимальное число,
+            self.timesMoney += i            # нужно для создания "верхушки" графика
+            if self.timesMoney > self.listmoneyMax:
+                self.listmoneyMax = self.timesMoney
+            elif 0 - self.timesMoney > self.listmoneyMax:
+                self.listmoneyMax = 0 - self.timesMoney
+        if self.firstmoney > 0:
+            self.listmoneyMax += self.firstmoney
+        self.max.setText(str(self.listmoneyMax))
+        self.min.setText('-' + str(self.listmoneyMax))
+        self.sredplus.setText(str(self.listmoneyMax / 2))
+        self.sredminus.setText('-' + str(self.listmoneyMax / 2))
 
     def paintEvent(self, e):
         qp = QPainter()
@@ -42,10 +56,9 @@ class Grafic(QWidget):
         qp.end()
 
     def oneShag(self):
-        shagY = self.listmoneyMax / 250
-        shagX = 480 / len(self.listmoney)
-
-        return shagX, shagY
+        shagY = (self.listmoneyMax + 10) / 250   # определяет количество шагов по принципу
+        shagX = 480 / len(self.listmoney)        # n денег = k шагов, для автоматического
+        return shagX, shagY                     # адаптирования графика
 
     def drawstart(self, qp):
         pen = QPen(Qt.black, 2, Qt.SolidLine)
@@ -55,23 +68,38 @@ class Grafic(QWidget):
 
         pen = QPen(Qt.red, 4, Qt.SolidLine)
         qp.setPen(pen)
-        corr = [10, 250]
+
         sX, sY = self.oneShag()
-        for i in range(len(self.listmoney)):
-            pen = QPen(Qt.red, 4, Qt.SolidLine)
-            qp.setPen(pen)
+        if self.firstmoney == 0:    # Проверка на то, было ли первая сумма( в самом начале) нулем.
+            corr = [10, 250]
+        else:                       # А если нет, то ставит первые кординаты соотвествующие
+            yFirst = 250 - self.firstmoney / sY
+            corr = [10, yFirst]     # сorr это начало следущей линии
+
+        lastChi = self.firstmoney
+        for i in range(len(self.listmoney)):   # сам алгоритм построения графика, работает - не лезь
+            corrY = lastChi + self.listmoney[i]
             x = (i + 1) * sX
             if self.listmoney[i] > 0:
-                y = self.listmoney[i] * sY + 1
-                print(sY)
+                pen = QPen(Qt.green, 4, Qt.SolidLine)
+                qp.setPen(pen)
+                y = 250 - corrY / sY
+
             else:
-                y = 500 - ((0 - self.listmoney[i]) * sY)
-            print(self.listmoney[i], '-------',  x, y)
+                pen = QPen(Qt.red, 4, Qt.SolidLine)
+                qp.setPen(pen)
+                y = (0 - corrY) / sY + 250
+
+            lastChi = corrY
+
             qp.drawLine(corr[0], corr[1], x, y)
             pen = QPen(Qt.black, 6)
             qp.setPen(pen)
             qp.drawPoint(x, y)
+            qp.drawPoint(corr[0], corr[1])
             corr = [x, y]
+        print('the end')
+
 
 
 

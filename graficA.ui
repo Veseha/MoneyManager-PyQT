@@ -16,7 +16,7 @@
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>140</x>
      <y>10</y>
      <width>171</width>
      <height>31</height>
@@ -38,6 +38,71 @@
    </property>
    <property name="text">
     <string>График за все время</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="max">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>55</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>1</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="sred">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>230</y>
+     <width>55</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="min">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>470</y>
+     <width>55</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>-1</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="sredplus">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>110</y>
+     <width>55</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0.5</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="sredminus">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>360</y>
+     <width>55</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>-0.5</string>
    </property>
   </widget>
  </widget>

@@ -113,8 +113,20 @@ class MainWindow(QMainWindow):
         self.deleteWW.show()
 
     def graficW(self):
-        self.graficWW = Grafic(self.comboBox.currentText())
-        self.graficWW.show()
+        cur = self.base.cursor()
+        a = cur.execute(
+            'SELECT * FROM operation WHERE scorename == "{}"'.format(self.comboBox.currentText())).fetchall()
+        if a:
+            self.graficWW = Grafic(self.comboBox.currentText())
+            self.graficWW.show()
+        else:
+            message = QMessageBox()
+            message.setIcon(QMessageBox.Information)
+            message.setText('Отсуствуют операции!')
+            message.setWindowTitle('Информация')
+            message.setStandardButtons(QMessageBox.Ok)
+            message.exec()
+
 
     def staticW(self):
         cur = self.base.cursor()
