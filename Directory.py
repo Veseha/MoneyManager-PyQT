@@ -1,0 +1,1 @@
+basesqlite3 = 'trans.db'
